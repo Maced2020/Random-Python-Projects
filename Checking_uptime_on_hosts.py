@@ -9,11 +9,10 @@ import paramiko
 # global variables
 USERNAME = 'ec2-user'
 KEYFILE = 'work.pem'
-
+FILEPATH = 'hosts.txt'
 
 print('-----Starting-----')
-filepath = 'hosts.txt'
-with open(filepath) as fp:
+with open(FILEPATH) as fp:
    line = fp.readline()
 
    for HOST in line:
