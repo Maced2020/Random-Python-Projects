@@ -11,19 +11,27 @@ def zip_and_gunzip():
         choice = input('would you like to Zip or Unzip a file? ').upper()
          
         
+
+        
         if choice == 'ZIP':
-            file_name = input('Give me a File to zip: ')
-            print('zipping ' + file_name)
-            os.system('sudo gzip ' + file_name) 
-            print('Done')
-            choice = 'DONE'
+            multiple_files = []
+            file_name = input('Give me a File(s) to Zip:')
+            multiple_files.append(str(file_name))
+            print('Zipping ' + str(multiple_files))
+            for file_name in multiple_files:
+                os.system('sudo gzip ' + str(file_name))
+                print('ZIP SUCCESSFUL')
+                choice = 'DONE'
 
 
         elif choice == 'UNZIP':
-            file_name = input(' Give me a File to unzip: ')
-            print(' unzipping ' + file_name)
-            os.system('sudo gunzip ' + file_name)
-            print('Done')
-            choice = 'DONE'
+            multiple_files = []
+            file_name = input('Give me a File(s) to Unzip:')
+            multiple_files.append(str(file_name))
+            print('Unzipping ' + str(multiple_files))
+            for file_name in multiple_files:
+                os.system('sudo gunzip ' + str(file_name))
+                print('UNZIP SUCCESSFUL')
+                choice = 'DONE'
 
 zip_and_gunzip()
