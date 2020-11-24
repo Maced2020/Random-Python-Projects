@@ -1,6 +1,7 @@
 #! /usr/bin/python3
 # I am atempting to automaticly zip and unzip large files (with no user input)
-# so far i have gotten to the point where i ask the users 
+# so far i have gotten to the point where I ask the users
+# if they would like to zip/unzip then will take the files from the users and zip/unzip them
 
 import os
 
