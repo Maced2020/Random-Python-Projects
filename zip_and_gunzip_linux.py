@@ -5,7 +5,7 @@
 import os
 
 
-# for linunx only
+# for linux only
 # This function asks the user if they would like to zip or unzip files
 # This function also takes in files from the user and zips them for the user 
 def zip_and_gunzip():
