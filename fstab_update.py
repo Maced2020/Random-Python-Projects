@@ -12,7 +12,7 @@ def fstab_Add():
     MOUNT_TYPE = input('Please provide me the drive type: ')
     os.system('sudo echo UUID=' + str(UUID) + ' ' + str(DIR) + ' '+ str(MOUNT_TYPE) + ' '+ 'defaults,noatime  1   1 >> /etc/fstab')
     os.system('sudo chmod 0644 /etc/fstab')
-    os.sxystem('sudo mount -a')
+    os.system('sudo mount -a')
     os.system('sudo chmod 777 ' + str(DIR))
     print('Done')
 fstab_Add()
