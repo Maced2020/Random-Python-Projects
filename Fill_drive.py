@@ -1,6 +1,7 @@
 
 #! /usr/bin/python3
-# creating a large File
+# A SIMPLE PROGRAM TO FILL A 5 GIG DRIVE
+# FINISHED ON 11/28/2020
 # will fill a 5 gig drive to 95%
 # used tqdm to create a progress bar
 
