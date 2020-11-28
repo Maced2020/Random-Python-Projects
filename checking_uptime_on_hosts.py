@@ -1,7 +1,7 @@
 #! /usr/bin/python3
-# I am atempting to  get a status of multiple hosts
-# finished on 11/15/2020
 # A SIMPLE PROGRAM TO CHECK STATUS OF MULTIPLE VM'S OR MACHINES VIA SSH
+# FINISHED ON 11/15/2020
+
 
 # CHANGE GLOBAL VARIABLES AS NEEDED.
 
