@@ -1,7 +1,8 @@
 #! /usr/bin/python3
-# I am atempting to automaticly zip and unzip large files (with no user input)
-# so far i have gotten to the point where I ask the users
-# if they would like to zip/unzip then will take the files from the users and zip/unzip them
+#zip_and_gunzip_linux
+
+# I made this as a silly fun way to zip and unzip files in linux using python
+# this can take in an unlimted amount of files and zip or unzip them at the same time
 
 import os
 
