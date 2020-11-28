@@ -1,5 +1,6 @@
 #! /usr/bin/python3
-# using python to add to the fstab file
+# A SIMPLE PROGRAM TO UPDATE FSTAB IN LINUX WITH NEW DRIVE MOUNT
+# FINISHED ON 11/26/2020
 
 import os
 
@@ -11,5 +12,6 @@ def fstab_Add():
     MOUNT_TYPE = input('Please provide me the drive type: ')
     os.system('sudo echo UUID=' + str(UUID) + ' ' + str(DIR) + ' '+ str(MOUNT_TYPE) + ' '+ 'defaults,noatime  1   1 >> /etc/fstab')
     os.system('sudo chmod 0644 /etc/fstab')
+    os.system('sudo chmod 777 ' + str(DIR))
     print('Done')
 fstab_Add()
