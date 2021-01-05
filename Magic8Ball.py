@@ -1,5 +1,5 @@
 # this is a magic 8 ball 
-# created  Jan 4th 2021
+# created  1/4/2021
 
 
 #! /usr/bin/python3
