@@ -1,6 +1,6 @@
 # I am attempting to make simon says 
 # started on jan/17/2021
-# currently not
+# currently not finished
 # developed by maced2020
 
 import random
@@ -12,13 +12,11 @@ import time
 colors = ['red', 'blue', 'yellow', 'green']
 user_list = []
 computer_list = []
-loop = False
 
 
 # this function creates a list of colors at random
 def computer_selcetion():
     while len(computer_list) < 4:
-        
         num = random.random()*4
         num = math.floor(num)
         computer_list.append(colors[num])
@@ -26,7 +24,7 @@ def computer_selcetion():
     print(computer_list)
 
 
-# this function is attempting to match computer list to user list
+# this function is getting input from the user and trying to match with computer list
 def user_selection():
     while user_list != computer_list:
         user = input('please match the computer list: ')
@@ -42,4 +40,3 @@ try:
 
 except:
     print('\nsome kind of Error happened ')
-    
