@@ -19,7 +19,7 @@ def game_loop():
     user_list = []
     timer = 1
     while winning == True:
-        # picking a randodm color
+        # simon picking a randodm color
         num = random.random()*4
         num = math.floor(num)
         computer_list.append(colors[num])
