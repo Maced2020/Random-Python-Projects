@@ -1,6 +1,6 @@
 # I am attempting to make simon says 
-# started on jan/17/2021
-# currently not finished
+# started jan/17/2021
+# Finished jan/22/2021 
 # developed by maced2020
 
 import random
@@ -8,35 +8,38 @@ import os
 import math
 import time
 
-# globasl variables 
+
+# global varibles
 colors = ['red', 'blue', 'yellow', 'green']
-user_list = []
 computer_list = []
+winning = True
 
-
-# this function creates a list of colors at random
-def computer_selcetion():
-    while len(computer_list) < 4:
+# game loop  function (simon keeps saying colors assuming you match him)
+def game_loop():
+    user_list = []
+    timer = 1
+    while winning == True:
+        # picking a randodm color
         num = random.random()*4
         num = math.floor(num)
         computer_list.append(colors[num])
-    # dev print statement
-    print(computer_list)
+        # printing out what simon said and then clearing the board to prevent cheating
+        print('Simon says: ', computer_list)
+        time.sleep(timer)
+        timer += .5
+        os.system('clear')
+        # asks the player for colors and adds them to the user list until both lists are the same length
+        while len(user_list) < len(computer_list):
+            user_input = input('What did the Simon say?: ').lower()
+            user_list.append(user_input)
 
-
-# this function is getting input from the user and trying to match with computer list
-def user_selection():
-    while user_list != computer_list:
-        user = input('please match the computer list: ')
-        user_list.append(user)
-        if len(user_list) > len(computer_list):
-            print('you failed to match')
+        if user_list != computer_list:
+            winning == False
+            print('You have lost!')
+            print(' Computer list: ', computer_list)
+            print(' Player list: ', user_list, '\n', 'You got: ', len(user_list) - 1, 'Correct')
             break
+        # clears out the user list so you can match with simon
+        user_list = []
 
-
-try:
-    computer_selcetion()
-    user_selection()
-
-except:
-    print('\nsome kind of Error happened ')
+game_loop()
