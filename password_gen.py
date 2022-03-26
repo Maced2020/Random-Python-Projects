@@ -4,14 +4,19 @@
 #
 import random
 
+# this function 
 def password_generator():
     alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=`~;'?./"
     userchoice = input("How long would you like your password to be?: ")
     password = " "
-    for i in range(userchoice):
-        randomletter = random.choice(alphabet)
-        password = randomletter + password      
-    return password
+    try:
+        for i in range(int(userchoice)):
+            randomletter = random.choice(alphabet)
+            password = randomletter + password
+        print(password)
+    except:
+        print("You are clearly not following the rules; you must be a hacker")
 
 
-print(password_generator())
+#this runs the functions and hands out a password
+password_generator()
