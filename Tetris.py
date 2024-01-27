@@ -140,6 +140,7 @@ def gameLoop():
     speed = 2
     level = 1
     last_speed_increase_score = 0  # Track the score at the last speed increase
+    paused = False  # Pause state
 
     game_over = False
 
@@ -148,56 +149,66 @@ def gameLoop():
         draw_piece(piece_x, piece_y, current_piece, shape_name)
         draw_grid(grid)  # Draw the grid
 
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over = True
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    if not check_collision(grid, current_piece, piece_x - 1, piece_y):
-                        piece_x -= 1
-                elif event.key == pygame.K_RIGHT:
-                    if not check_collision(grid, current_piece, piece_x + 1, piece_y):
-                        piece_x += 1
-                elif event.key == pygame.K_DOWN:
-                    while not check_collision(grid, current_piece, piece_x, piece_y + 1):
-                        piece_y += 1
-                elif event.key == pygame.K_SPACE:
-                    rotated_piece = rotate_piece(current_piece)
-                    if not check_collision(grid, rotated_piece, piece_x, piece_y):
-                        current_piece = rotated_piece
+                if event.key == pygame.K_p:  # Toggle pause state
+                    paused = not paused
+                if not paused:
+                    if event.key == pygame.K_LEFT:
+                        if not check_collision(grid, current_piece, piece_x - 1, piece_y):
+                            piece_x -= 1
+                    elif event.key == pygame.K_RIGHT:
+                        if not check_collision(grid, current_piece, piece_x + 1, piece_y):
+                            piece_x += 1
+                    elif event.key == pygame.K_DOWN:
+                        while not check_collision(grid, current_piece, piece_x, piece_y + 1):
+                            piece_y += 1
+                    elif event.key == pygame.K_SPACE:
+                        rotated_piece = rotate_piece(current_piece)
+                        if not check_collision(grid, rotated_piece, piece_x, piece_y):
+                            current_piece = rotated_piece
 
-        if not check_collision(grid, current_piece, piece_x, piece_y + 1):
-            piece_y += 1
-        else:
-            lock_piece(grid, current_piece, shape_name, piece_x, piece_y)  # Pass shape_name
-            lines_cleared = clear_lines(grid)  # Check and clear lines
-            score += lines_cleared * 100  # Update score based on lines cleared
-            current_piece, shape_name = get_random_piece()
-            piece_x = (grid_width - len(current_piece[0])) // 2
-            piece_y = 0
-            if score - last_speed_increase_score >= 200:
-                speed += 0.5  # Increase game speed
-                level += 1
-                last_speed_increase_score = score
-            if check_collision(grid, current_piece, piece_x, piece_y):
-                game_over = True
-        
+        if not paused:
+            if not check_collision(grid, current_piece, piece_x, piece_y + 1):
+                piece_y += 1
+            else:
+                lock_piece(grid, current_piece, shape_name, piece_x, piece_y)  # Pass shape_name
+                lines_cleared = clear_lines(grid)  # Check and clear lines
+                score += lines_cleared * 100  # Update score based on lines cleared
+                current_piece, shape_name = get_random_piece()
+                piece_x = (grid_width - len(current_piece[0])) // 2
+                piece_y = 0
+                if score - last_speed_increase_score >= 1000:
+                    speed += 0.5  # Increase game speed
+                    level += 1
+                    last_speed_increase_score = score
+                if check_collision(grid, current_piece, piece_x, piece_y):
+                    game_over = True  
+
         score_text = score_font_style.render(f'Score: {score}', True, hud_text)
-        title_text = title_font_style.render(f'TETRIS', True, hud_text)
         level_text = level_font_style.render(f'Level: {level}', True, hud_text)
+        title_text = title_font_style.render(f'TETRIS', True, hud_text)
+        if paused:
+            paused_text = title_font_style.render('Paused', True, hud_text)
+            text_rect = paused_text.get_rect(center=(dis_width / 2, dis_height / 2))
+            dis.blit(paused_text, text_rect)
         if game_over:
             game_over_text = title_font_style.render('Game Over', True, hud_text)
             text_rect = game_over_text.get_rect(center=(dis_width / 2, dis_height / 2))
             dis.blit(game_over_text, text_rect)
+
         dis.blit(score_text, (10, 10))  # Position the score text in the top-left corner
         dis.blit(level_text, (10, 35))
         dis.blit(title_text, (350, 10))
+
         pygame.display.update()  # Update the display
-        clock.tick(speed)  # Control the frame rate
+        clock.tick(speed if not paused else 0)  # Control the frame rate
 
     pygame.quit()
     quit()
+
 
 
 
