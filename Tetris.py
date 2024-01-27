@@ -3,6 +3,17 @@ import random
 
 # Initialize pygame
 pygame.init()
+pygame.mixer.init()  # Initialize the mixer module
+
+pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
+
+# Load and play background music
+music_file = "Music path goes here"  # Replace with your music file path
+try:
+    pygame.mixer.music.load(music_file)
+    pygame.mixer.music.play(-1)  # Play the music indefinitely
+except pygame.error as e:
+    print(f"Cannot load music file '{music_file}': {e}")
 # You can change the font and size
 score_font_style = pygame.font.SysFont("Arial", 24)
 title_font_style = pygame.font.SysFont("Arial", 62)
